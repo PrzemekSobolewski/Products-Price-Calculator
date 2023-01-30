@@ -42,8 +42,7 @@ export const ProductsCalculator = () => {
   const handleSelectedProductsOptionsChange = (
     newValue: MultiValue<SelectOption>,
   ) => {
-    const values = newValue.filter((product) => !product.isDisabled);
-    setSelectedProductsOptions(values);
+    setSelectedProductsOptions([...newValue]);
   };
 
   useEffect(() => {
@@ -93,8 +92,8 @@ export const ProductsCalculator = () => {
 
   return (
     <>
-      <section css={productsCalculatorStyles.selectContainer}>
-        <div css={productsCalculatorStyles.select}>
+      <div css={productsCalculatorStyles.selectContainer}>
+        <div css={productsCalculatorStyles.selectWrapper}>
           <p>Wybierz produkty z listy</p>
           <Select
             name="products"
@@ -105,7 +104,7 @@ export const ProductsCalculator = () => {
             value={filteredSelectedProductsOptions}
           />
         </div>
-        <div css={productsCalculatorStyles.select}>
+        <div css={productsCalculatorStyles.selectWrapper}>
           <p>Wybierz rok</p>
           <Select
             name="years"
@@ -116,18 +115,18 @@ export const ProductsCalculator = () => {
             onChange={handleSelectedYearChange}
           />
         </div>
-      </section>
-      <section css={productsCalculatorStyles.listContainer}>
+      </div>
+      <div css={productsCalculatorStyles.listContainer}>
         <ul css={productsCalculatorStyles.selectedProductsList}>
           {selectedProducts.map((product) => {
             const { id, name, prices } = product;
             return <ProductItem key={id} name={name} prices={prices} />;
           })}
         </ul>
-      </section>
-      <section css={productsCalculatorStyles.priceContainer}>
-        suma: {sumPrice.toFixed(2)} zł
-      </section>
+      </div>
+      <div css={productsCalculatorStyles.priceContainer}>
+        Cena wybranych usług: {sumPrice.toFixed(2)} zł
+      </div>
     </>
   );
 };

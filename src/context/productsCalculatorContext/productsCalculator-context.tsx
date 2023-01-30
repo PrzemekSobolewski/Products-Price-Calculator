@@ -16,6 +16,7 @@ export const ProductsCalculatorContext =
     selectedYear: 2023,
     setSelectedYear: () => undefined,
     sumPrice: 0,
+    getProductCurrentPrice: (prices: Price[]) => undefined,
   });
 
 export const ProductsCalculatorContextProvider = ({
@@ -29,7 +30,7 @@ export const ProductsCalculatorContextProvider = ({
   );
   const [sumPrice, setSumPrice] = useState<number>(0);
 
-  const getCurrentPrice = (prices: Price[], year: number) => {
+  const getProductCurrentPrice = (prices: Price[]) => {
     return prices.find((price) => price.year === selectedYear)?.price;
   };
 
@@ -45,7 +46,7 @@ export const ProductsCalculatorContextProvider = ({
     const productsPrices = selectedProducts.map((product) => {
       const { id, prices } = product;
 
-      const currentPrice = getCurrentPrice(prices, selectedYear);
+      const currentPrice = getProductCurrentPrice(prices);
 
       const isPromoProduct = activePromotions.some(
         (promotion) => promotion.productsIds.indexOf(id) !== -1,
@@ -60,7 +61,7 @@ export const ProductsCalculatorContextProvider = ({
 
     const promotionPrices = activePromotions.map((promotion) => {
       const { prices } = promotion;
-      const currentPrice = getCurrentPrice(prices, selectedYear);
+      const currentPrice = getProductCurrentPrice(prices);
 
       return { price: currentPrice };
     });
@@ -88,6 +89,7 @@ export const ProductsCalculatorContextProvider = ({
     selectedYear,
     setSelectedYear,
     sumPrice,
+    getProductCurrentPrice,
   };
 
   return (

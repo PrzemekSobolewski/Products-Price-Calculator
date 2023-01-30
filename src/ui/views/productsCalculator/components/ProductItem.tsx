@@ -8,14 +8,14 @@ type ProductItemProps = {
 };
 
 export const ProductItem = ({ name, prices }: ProductItemProps) => {
-  const [price, setPrice] = useState<number>();
-  const { selectedYear } = useContext(ProductsCalculatorContext);
+  const [price, setPrice] = useState<number>(0);
+  const { selectedYear, getProductCurrentPrice } = useContext(
+    ProductsCalculatorContext,
+  );
 
   useEffect(() => {
-    const currentPrice = prices.find(
-      (price) => price.year === selectedYear,
-    )?.price;
-    setPrice(currentPrice);
+    const currentPrice = getProductCurrentPrice(prices);
+    setPrice(currentPrice || 0);
   }, [selectedYear]);
 
   return (

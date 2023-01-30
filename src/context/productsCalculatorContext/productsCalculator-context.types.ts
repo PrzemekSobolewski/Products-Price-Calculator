@@ -32,6 +32,7 @@ export type ProductsCalculatorContextProps = {
   selectedYear: number;
   setSelectedYear: Dispatch<SetStateAction<number>>;
   sumPrice: number;
+  getProductCurrentPrice: (prices: Price[]) => number | undefined;
 };
 
 export type IProductsCalculatorContextProvider = {

@@ -28,7 +28,7 @@ export const productsCalculatorStyles = {
     justify-content: space-between;
     ${sharedContainerStyles}
   `,
-  select: css`
+  selectWrapper: css`
     width: calc(50% - 16px);
   `,
   listContainer: css`
